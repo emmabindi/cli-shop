@@ -3,25 +3,6 @@ require 'csv'
 require_relative './models/products'
 require "tty-prompt"
 
-# DONE Load a list of products from a file. 
-# DONE List product details to the user.
-# Add products to a Shopping Cart. 
-# Apply promotional discounts. 
-# Calculate and display the total cost.
-
-# def save_to_cart(product_for_cart)
-
-#   # CSV.open('./cart.csv', 'a') do | csv |
-#   #   csv << [[product_for_cart[0]["name"]], [product_for_cart[0]["price"]]]
-#   # end
-#   File.open("./cart.json", "a") do | item |
-#     products_json = []
-#     item.write(product_for_cart[0].to_json)
-#     # item.puts product_for_cart[0].to_json
-#   end
-#   menu
-# end
-
 def menu
   p "Hi, welcome to Bob's Bits the #1 CLI Shop"
   prompt = TTY::Prompt.new
@@ -40,10 +21,7 @@ end
 @shopping_cart = []
 
 def add_to_cart(product_for_cart)
-  # puts "----#{product_for_cart}"
   @shopping_cart.push(product_for_cart).flatten!
-  # @shopping_cart.flatten!
-  # puts "Shop Cart: #{@shopping_cart}"
   menu
 end
 
@@ -61,52 +39,37 @@ def view_all_products
   # List product names so that user can select
   prompt = TTY::Prompt.new
   item_to_add_to_cart = prompt.select("Select which items to add to cart", options)
-  # puts product_data
   # Match the name selected with product 
   product_for_cart = product_data.select do |product |
     item_to_add_to_cart == product["name"]
   end
   add_to_cart(product_for_cart)
-  # save_to_cart(product_for_cart)
 end
 
 def view_shopping_cart
-  @subtotal = @shopping_cart.map {|item| item["price"]}.sum
-
-  # Apply discount based on cart subtotal
-  # subtotal >= 100.0 ? @total = subtotal - (subtotal * 20 / 100) : ""
-  # subtotal >= 50.0 ? @total = subtotal - (subtotal * 15 / 100) : ""
-  # subtotal >= 20.0 ? @total = subtotal - (subtotal * 10 / 100) : @total = subtotal
- 
   def discount_calc
+    subtotal = @shopping_cart.map {|item| item["price"]}.sum
     @cart_data = {}
-    if @subtotal >= 100.0 
+    if subtotal >= 100.0 
       @cart_data[:discount] = 20
-    elsif @subtotal >= 50
+    elsif subtotal >= 50
       @cart_data[:discount] = 15
-    elsif @subtotal >= 20.0
+    elsif subtotal >= 20.0
       @cart_data[:discount] = 10
     else
       @cart_data[:discount] = 0
     end
-    @cart_data[:total] = (@subtotal - (@subtotal * @cart_data[:discount] / 100.00))
+    @cart_data[:total] = (subtotal - (subtotal * @cart_data[:discount] / 100.00))
     return @cart_data
   end
-
   discount_calc
-
-  # puts `clear`
-  # puts "Subtotal: #{subtotal}"
+  puts `clear`
   puts "Products in Shopping Cart:"
   @shopping_cart.each_with_index do | item, i |
-    puts "#{i + 1}. #{item["name"]} - $#{item["price"].round(2)}"
+    puts "  #{i + 1}. #{item["name"]} - $#{item["price"].round(2)}\n\n"
   end
-
-  puts "   Discount applied: #{@cart_data[:discount]}%"
-  # puts "#{@shopping_cart}"
-  # puts "Total After Discount: $#{@total.round(2)}"
-  puts "Total After Discount: $#{@cart_data[:total].round(2)}"
-  # pp @shopping_cart
+  puts "Discount applied: #{@cart_data[:discount]}%\n\n"
+  puts "Total After Discount: $#{@cart_data[:total].round(2)}\n\n"
 end
 
 begin

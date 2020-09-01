@@ -37,6 +37,16 @@ def menu
   end
 end
 
+@shopping_cart = []
+
+def add_to_cart(product_for_cart)
+  # puts "----#{product_for_cart}"
+  @shopping_cart.push(product_for_cart).flatten!
+  # @shopping_cart.flatten!
+  # puts "Shop Cart: #{@shopping_cart}"
+  menu
+end
+
 def view_all_products
   # # Open & load products file (parse and read)
   file = File.open "./products.json"
@@ -52,14 +62,21 @@ def view_all_products
   prompt = TTY::Prompt.new
   item_to_add_to_cart = prompt.select("Select which items to add to cart", options)
 
+  puts product_data
+
   product_for_cart = product_data.select do |product |
     item_to_add_to_cart == product["name"]
   end
-  
+  add_to_cart(product_for_cart)
+  # save_to_cart(product_for_cart)
 end
 
 def view_shopping_cart
-  p shopping_cart
+  @shopping_cart.flatten
+  pp @shopping_cart
+  def total
+
+  end
 end
 
 begin

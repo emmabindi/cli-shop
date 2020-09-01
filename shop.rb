@@ -71,23 +71,41 @@ def view_all_products
 end
 
 def view_shopping_cart
-  subtotal = @shopping_cart.map {|item| item["price"]}.sum
+  @subtotal = @shopping_cart.map {|item| item["price"]}.sum
 
   # Apply discount based on cart subtotal
-  subtotal >= 100.0 ? @total = subtotal - (subtotal * 20 / 100) : ""
-  subtotal >= 50.0 ? @total = subtotal - (subtotal * 15 / 100) : ""
-  subtotal >= 20.0 ? @total = subtotal - (subtotal * 10 / 100) : @total = subtotal
+  # subtotal >= 100.0 ? @total = subtotal - (subtotal * 20 / 100) : ""
+  # subtotal >= 50.0 ? @total = subtotal - (subtotal * 15 / 100) : ""
+  # subtotal >= 20.0 ? @total = subtotal - (subtotal * 10 / 100) : @total = subtotal
+ 
+  def discount_calc
+    @cart_data = {}
+    if @subtotal >= 100.0 
+      @cart_data[:discount] = 20
+    elsif @subtotal >= 50
+      @cart_data[:discount] = 15
+    elsif @subtotal >= 20.0
+      @cart_data[:discount] = 10
+    else
+      @cart_data[:discount] = 0
+    end
+    @cart_data[:total] = (@subtotal - (@subtotal * @cart_data[:discount] / 100.00))
+    return @cart_data
+  end
 
-  puts `clear`
+  discount_calc
+
+  # puts `clear`
   # puts "Subtotal: #{subtotal}"
   puts "Products in Shopping Cart:"
   @shopping_cart.each_with_index do | item, i |
     puts "#{i + 1}. #{item["name"]} - $#{item["price"].round(2)}"
   end
 
-  puts "Discount applied: NEED THIS TO BE A NICE VARIABLE on total greater than VARIABLE"
+  puts "   Discount applied: #{@cart_data[:discount]}%"
   # puts "#{@shopping_cart}"
-  puts "Total After Discount: $#{@total.round(2)}"
+  # puts "Total After Discount: $#{@total.round(2)}"
+  puts "Total After Discount: $#{@cart_data[:total].round(2)}"
   # pp @shopping_cart
 end
 

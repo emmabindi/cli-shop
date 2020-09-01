@@ -9,18 +9,18 @@ require "tty-prompt"
 # Apply promotional discounts. 
 # Calculate and display the total cost.
 
-def save_to_cart(product_for_cart)
+# def save_to_cart(product_for_cart)
 
-  # CSV.open('./cart.csv', 'a') do | csv |
-  #   csv << [[product_for_cart[0]["name"]], [product_for_cart[0]["price"]]]
-  # end
-  File.open("./cart.json", "a") do | item |
-    products_json = []
-    item.write(product_for_cart[0].to_json)
-    # item.puts product_for_cart[0].to_json
-  end
-  menu
-end
+#   # CSV.open('./cart.csv', 'a') do | csv |
+#   #   csv << [[product_for_cart[0]["name"]], [product_for_cart[0]["price"]]]
+#   # end
+#   File.open("./cart.json", "a") do | item |
+#     products_json = []
+#     item.write(product_for_cart[0].to_json)
+#     # item.puts product_for_cart[0].to_json
+#   end
+#   menu
+# end
 
 def menu
   p "Hi, welcome to Bob's Bits the #1 CLI Shop"
@@ -55,7 +55,7 @@ def view_all_products
   product_for_cart = product_data.select do |product |
     item_to_add_to_cart == product["name"]
   end
-  save_to_cart(product_for_cart)
+  
 end
 
 def view_shopping_cart
@@ -64,12 +64,6 @@ end
 
 begin
   menu
-  # CSV.generate do | csv |
-  #   csv << [:blue, 1]
-  #   csv << [:white, 2]
-  # end
-
-  
 # rescue => exception
 #   puts "Sorry that didn't work, please try again"
 end

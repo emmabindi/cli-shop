@@ -74,9 +74,9 @@ def view_shopping_cart
   subtotal = @shopping_cart.map {|item| item["price"]}.sum
 
   # Apply discount based on cart subtotal
-  subtotal > 100.0 ? @total = subtotal - (subtotal * 20 / 100) : ""
-  subtotal > 50.0 ? @total = subtotal - (subtotal * 15 / 100) : ""
-  subtotal > 20.0 ? @total = subtotal - (subtotal * 10 / 100) : @total = subtotal
+  subtotal >= 100.0 ? @total = subtotal - (subtotal * 20 / 100) : ""
+  subtotal >= 50.0 ? @total = subtotal - (subtotal * 15 / 100) : ""
+  subtotal >= 20.0 ? @total = subtotal - (subtotal * 10 / 100) : @total = subtotal
 
   puts `clear`
   # puts "Subtotal: #{subtotal}"

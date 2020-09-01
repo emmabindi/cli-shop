@@ -9,6 +9,19 @@ require "tty-prompt"
 # Apply promotional discounts. 
 # Calculate and display the total cost.
 
+def save_to_cart(product_for_cart)
+
+  # CSV.open('./cart.csv', 'a') do | csv |
+  #   csv << [[product_for_cart[0]["name"]], [product_for_cart[0]["price"]]]
+  # end
+  File.open("./cart.json", "a") do | item |
+    products_json = []
+    item.write(product_for_cart[0].to_json)
+    # item.puts product_for_cart[0].to_json
+  end
+  menu
+end
+
 def menu
   p "Hi, welcome to Bob's Bits the #1 CLI Shop"
   prompt = TTY::Prompt.new
@@ -25,60 +38,24 @@ def menu
 end
 
 def view_all_products
-  prompt = TTY::Prompt.new
-
-
-  # # Read products file 
-  # file = File.read('./products.json')
-  # # Parse json into hash
-  # products_json = JSON.parse(file)
-
-  # shows but doesnt save:
-  # data_hash = JSON.parse(File.read('./products.json'))
-  # data_hash.map do | product |
-  #   puts "This is inside the map#{product}"
-  # end
-
+  # # Open & load products file (parse and read)
   file = File.open "./products.json"
-  data = JSON.load file
+  product_data = JSON.load file
 
-  puts data
-  puts data[0]
-  puts data[1]["name"]
-
-  # Display the products hash
-  # product_list = []
-  # products_json.each do | product |
-  #   row = product.to_hash
-  #   product_list.push(Product.new(row['uuid'], row['name'], row['price']))
-  # end
   # Print out each items name for the menu selection
-  # options = []
-  # product_list.each do | item |
-  #   options.push(item.name)
-  # end 
-  # # List product names so that user can select
-  # item_to_add_to_cart = prompt.select("Select which items to add to cart", options)
+  options = []
+  product_data.each do | item |
+    options.push(item["name"])
+  end
 
-  # item_data_for_cart = product_list.select do |product |
-  #   item_to_add_to_cart == product.name
-  # end
+  # List product names so that user can select
+  prompt = TTY::Prompt.new
+  item_to_add_to_cart = prompt.select("Select which items to add to cart", options)
 
-  # puts ""
-  # puts item_data_for_cart
-
-
-
-
-
-
-  # shopping_cart = []
-  
-  # def add_item_to_cart(item_to_add_to_cart)
-  #   shopping_cart.push(item_to_add_to_cart)
-  # end
-  # menu
-  # return shopping_cart
+  product_for_cart = product_data.select do |product |
+    item_to_add_to_cart == product["name"]
+  end
+  save_to_cart(product_for_cart)
 end
 
 def view_shopping_cart

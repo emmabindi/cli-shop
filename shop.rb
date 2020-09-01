@@ -61,9 +61,8 @@ def view_all_products
   # List product names so that user can select
   prompt = TTY::Prompt.new
   item_to_add_to_cart = prompt.select("Select which items to add to cart", options)
-
-  puts product_data
-
+  # puts product_data
+  # Match the name selected with product 
   product_for_cart = product_data.select do |product |
     item_to_add_to_cart == product["name"]
   end
@@ -72,11 +71,9 @@ def view_all_products
 end
 
 def view_shopping_cart
-  @shopping_cart.flatten
-  pp @shopping_cart
-  def total
-
-  end
+  subtotal = @shopping_cart.map {|item| item["price"]}.sum
+  puts "Total: #{subtotal}"
+  # pp @shopping_cart
 end
 
 begin

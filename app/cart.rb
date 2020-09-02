@@ -1,15 +1,17 @@
 require 'tty-prompt'
 
-module Cart
-  @shopping_cart = []
+class Cart
+  def initialize
+    @shopping_cart = []
+  end
 
   # Add the product selected to the shopping cart array
-  def self.add_to_cart(product_for_cart)
+  def add_to_cart(product_for_cart)
     @shopping_cart.push(product_for_cart).flatten!
     puts `clear`
   end
 
-  def self.view_shopping_cart
+  def view_shopping_cart
     # apply promo discounts based on cart subtotal
     def self.discount_calc
       # calculator subtotal of items in cart

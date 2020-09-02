@@ -4,7 +4,8 @@ require_relative './menu'
 
 class Controller
   def initialize
-    @menu = Menu.new
+    @cart = Cart.new
+    @menu = Menu.new(@cart)
   end
 
   def run

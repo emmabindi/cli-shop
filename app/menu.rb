@@ -3,6 +3,10 @@ require_relative './product.rb'
 require_relative './cart.rb'
 
 class Menu
+  def initialize(cart)
+    @cart = cart
+  end
+
   puts "Hi, welcome to Bob's Bits the #1 CLI Shop"
   def display_menu
     puts "--------------------------------------------------------------"
@@ -11,9 +15,9 @@ class Menu
   
     case menu_selection
     when "View All Products"
-      Products::view_all_products
+      Products::view_all_products(@cart)
     when "View Shopping Cart"
-      Cart::view_shopping_cart
+      @cart.view_shopping_cart
     when "Exit"
       puts "Goodbye"
       exit

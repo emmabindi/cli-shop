@@ -10,7 +10,7 @@ module Products
     end
   end
 
-  def self.view_all_products
+  def self.view_all_products(cart)
     # # Open & load products file (parse and read)
     file = File.open "./products.json"
     product_data = JSON.load file
@@ -35,6 +35,6 @@ module Products
     product_for_cart = product_list.select do |product |
       item_to_add_to_cart.include?(product["name"])
     end
-    Cart::add_to_cart(product_for_cart)
+    cart.add_to_cart(product_for_cart)
   end
 end

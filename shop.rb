@@ -1,5 +1,4 @@
 require 'json'
-require 'csv'
 require "tty-prompt"
 require_relative 'modules/cart'
 require_relative 'modules/products.rb'

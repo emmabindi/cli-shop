@@ -5,7 +5,6 @@ module Cart
 
   def self.add_to_cart(product_for_cart)
     @shopping_cart.push(product_for_cart).flatten!
-    puts @shopping_cart
     puts `clear`
   end
 
@@ -26,6 +25,7 @@ module Cart
       return @cart_data
     end
     discount_calc
+    puts ""
     puts "Products in Shopping Cart:"
     @shopping_cart.each_with_index do | item, i |
       puts "  #{i + 1}. #{item["name"]} - $#{'%.2f' % item["price"]}\n\n"

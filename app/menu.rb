@@ -1,6 +1,6 @@
 require 'tty-prompt'
-require_relative '../models/product.rb'
-require_relative '../models/cart.rb'
+require_relative './product.rb'
+require_relative './cart.rb'
 
 class Menu
   puts "Hi, welcome to Bob's Bits the #1 CLI Shop"

@@ -1,6 +1,6 @@
-require_relative './models/cart'
-require_relative './models/product'
-require_relative './views/menu'
+require_relative './cart'
+require_relative './product'
+require_relative './menu'
 
 class Controller
   def initialize

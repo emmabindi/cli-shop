@@ -1,4 +1,5 @@
 require 'rspec'
+require 'spec_helper'
 
 class Product 
   attr_accessor :uuid, :name, :price

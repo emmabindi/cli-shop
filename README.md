@@ -26,7 +26,8 @@ _To load a new product list:_
 
 - DRY code principles
 - Concise & meaningful method names
-- Modularised methods (Shopping Cart actions separated)
-- Product Class utilised to create all shop product objects
+- Modularised code inspired by MVC principles
+- Product class utilised to create all shop product objects from an external file
+- Cart class utilised to contain cart specific variables and methods
 - Testing of app functionality through extensive manual testing
-- RSPEC testing of product class
+- RSPEC testing of classes

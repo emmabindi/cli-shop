@@ -35,6 +35,9 @@ module Products
     product_for_cart = product_list.select do |product |
       item_to_add_to_cart.include?(product["name"])
     end
-    # Cart::add_to_cart(product_for_cart)
+    # items = []
+    # items.push(product_for_cart)
+    # puts items
+    Cart::add_to_cart(product_for_cart)
   end
 end

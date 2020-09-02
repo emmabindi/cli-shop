@@ -1,11 +1,11 @@
-# require_relative './models/product'
 require_relative './models/cart'
-require_relative './menu'
+require_relative './models/product'
+require_relative './views/menu'
 
 class Controller
+  # attr_reader :cart
   def initialize
-    # @product = Product.new(12, "thing", 45.32)
-    @cart = Cart.new
+    # @cart = Cart::Cart.new
     @menu = Menu.new
   end
 

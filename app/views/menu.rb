@@ -1,9 +1,11 @@
 require 'tty-prompt'
-require_relative './models/product.rb'
+require_relative '../models/product.rb'
+require_relative '../models/cart.rb'
 
 class Menu
+  puts "Hi, welcome to Bob's Bits the #1 CLI Shop"
   def display_menu
-    puts "Hi, welcome to Bob's Bits the #1 CLI Shop"
+    puts "--------------------------------------------------------------"
     prompt = TTY::Prompt.new
     menu_selection = prompt.select("Select a menu item", ["View All Products", "View Shopping Cart", "Exit"])
   
@@ -14,7 +16,7 @@ class Menu
       Cart::view_shopping_cart
     when "Exit"
       puts "Goodbye"
-      puts `^c`
+      exit
     end
   end
 end

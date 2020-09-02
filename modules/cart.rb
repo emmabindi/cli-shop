@@ -29,6 +29,6 @@ module Cart
       puts "  #{i + 1}. #{item["name"]} - $#{'%.2f' % item["price"]}\n\n"
     end
     puts "Discount applied: #{@cart_data[:discount]}%\n\n"
-    puts "Total After Discount: $#{@cart_data[:total].round(2)}\n\n"
+    puts "Total After Discount: $#{'%.2f' % @cart_data[:total]}\n\n"
   end
 end

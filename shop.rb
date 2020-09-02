@@ -22,6 +22,7 @@ end
 
 def add_to_cart(product_for_cart)
   @shopping_cart.push(product_for_cart).flatten!
+  puts `clear`
   menu
 end
 
@@ -33,15 +34,17 @@ def view_all_products
   # Print out each items name for the menu selection
   options = []
   product_data.each do | item |
-    options.push(item["name"])
+    details = item["name"] + " $" + ('%.2f' % item["price"]).to_s
+    options.push(details)
   end
 
   # List product names so that user can select
   prompt = TTY::Prompt.new
+  puts `clear`
   item_to_add_to_cart = prompt.select("Select which items to add to cart", options)
   # Match the name selected with product 
   product_for_cart = product_data.select do |product |
-    item_to_add_to_cart == product["name"]
+    item_to_add_to_cart.include?(product["name"])
   end
   add_to_cart(product_for_cart)
 end
@@ -63,10 +66,9 @@ def view_shopping_cart
     return @cart_data
   end
   discount_calc
-  puts `clear`
   puts "Products in Shopping Cart:"
   @shopping_cart.each_with_index do | item, i |
-    puts "  #{i + 1}. #{item["name"]} - $#{item["price"].round(2)}\n\n"
+    puts "  #{i + 1}. #{item["name"]} - $#{'%.2f' % item["price"]}\n\n"
   end
   puts "Discount applied: #{@cart_data[:discount]}%\n\n"
   puts "Total After Discount: $#{@cart_data[:total].round(2)}\n\n"

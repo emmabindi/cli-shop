@@ -1,5 +1,6 @@
 ```
 $ git clone <this repo>
+$ gem install tty-prompt json
 $ ruby shop.rb
 ```
 

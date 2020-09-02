@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require_relative './models/product.rb'
 
 class Menu
   def display_menu

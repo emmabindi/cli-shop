@@ -1,6 +1,8 @@
 require 'tty-prompt'
 
 class Cart
+  attr_accessor :shopping_cart
+
   def initialize
     @shopping_cart = []
   end
